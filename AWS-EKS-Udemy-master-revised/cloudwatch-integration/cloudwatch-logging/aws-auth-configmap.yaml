@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-O0PVPSNUYKNV
+      username: system:node:{{EC2PrivateDNSName}}
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-1F2B08K7NUSLC
+      username: system:node:{{EC2PrivateDNSName}}
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-QCF2YMXF3694
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::Your-account-ID:user/k8s-cluster-admin
+      username: k8s-cluster-admin
+      groups:
+        - system:masters
+    - userarn: arn:aws:iam::Your-account-ID:user/prod-viewer
+      username: prod-viewer
+      groups:
+        - prod-viewer-role
+ 
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-O0PVPSNUYKNV\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-1F2B08K7NUSLC\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::Your-account-ID:role/eksctl-EKS-course-cluster-nodegro-NodeInstanceRole-QCF2YMXF3694\n  username: system:node:{{EC2PrivateDNSName}}\n","mapUsers":"- userarn: arn:aws:iam::Your-account-ID:user/k8s-cluster-admin\n  username: k8s-cluster-admin\n  groups:\n    - system:masters\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2022-04-06T22:56:11Z","name":"aws-auth","namespace":"kube-system","resourceVersion":"157997","uid":"9e697607-289d-4005-8184-363c8d870225"}}
+  creationTimestamp: "2022-04-06T22:56:11Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "241787"
+  uid: 9e697607-289d-4005-8184-363c8d870225

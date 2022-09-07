@@ -1,0 +1,18 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: EKS-course-cluster-fargate
+  region: us-west-2
+
+fargateProfiles:
+  - name: fargate-demo
+    selectors:
+      - namespace: default
+      - namespace: kube-system
+  - name: staging
+    selectors:
+      - namespace: staging
+        labels:
+          env: staging
+          checks: passed
